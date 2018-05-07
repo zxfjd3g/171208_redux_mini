@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
+import {connect} from '../libs/react-redux'
 import {increment, decrement, addMsg} from '../redux/actions'
 
 // UI组件(不使用redux相关API)
@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('app', this)
+    console.log('app', this.props)
     const {count, msgs} = this.props
     return (
       <div>
