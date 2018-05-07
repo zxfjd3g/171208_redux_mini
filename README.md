@@ -74,7 +74,7 @@
   
    
 ## 实现mini版react-redux
-## 1. 理解redux模块
+## 1. 理解react-redux模块
      1). react-redux模块整体是一个对象模块
      2). 包含2个重要属性: Provider和connect
      3). Provider
@@ -91,7 +91,7 @@
       当你觉得多层传递props麻烦, 可以选择使用context
       context是组件对象的一个属性, 它的值是一个对象
       一个组件指定的context内数据, 所有层次子组件都可以读取到
-      如果可以尽量不用context, 你可以选择使用redux, redux内部就利用了context
+      如果可以尽量不用context, 你可以选择使用react-redux, react-redux内部就利用了context
     2). 使用
       父组件:
           static childContextTypes = {

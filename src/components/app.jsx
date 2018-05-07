@@ -1,31 +1,29 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import {increment, decrement, addMsg} from '../redux/actions'
 
-export default class App extends Component {
-
-  static propTypes = {
-    store: PropTypes.object.isRequired
-  }
+// UI组件(不使用redux相关API)
+class App extends Component {
 
   increment = () => {
     // 1. 得到选择增加数量
     const number = this.select.value * 1
-    this.props.store.dispatch(increment(number))
+    this.props.increment(number)
   }
 
   decrement = () => {
     // 1. 得到选择增加数量
     const number = this.select.value * 1
-    this.props.store.dispatch(decrement(number))
+    this.props.decrement(number)
   }
 
   incrementIfOdd = () => {
     // 1. 得到选择增加数量
     const number = this.select.value * 1
-    const count = this.props.store.getState().count
+    const count = this.props.count
     if (count % 2 === 1) {
-      this.props.store.dispatch(increment(number))
+      this.props.increment(number)
     }
   }
 
@@ -33,17 +31,18 @@ export default class App extends Component {
     // 1. 得到选择增加数量
     const number = this.select.value * 1
     setTimeout(() => {
-      this.props.store.dispatch(increment(number))
+      this.props.increment(number)
     }, 1000)
   }
 
   addMsg = () => {
     const msg = this.input.value
-    this.props.store.dispatch(addMsg(msg))
+    this.props.addMsg(msg)
   }
 
   render() {
-    const {count, msgs} = this.props.store.getState()
+    console.log('app', this)
+    const {count, msgs} = this.props
     return (
       <div>
         <p>click {count} times</p>
@@ -79,3 +78,9 @@ export default class App extends Component {
     )
   }
 }
+
+// 向外默认暴露包装UI组件产生的容器组件
+export default connect(
+  state => ({count: state.count, msgs: state.msgs}),  // count, msgs
+  {increment, decrement, addMsg}
+)(App)

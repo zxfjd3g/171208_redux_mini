@@ -20,9 +20,11 @@
       color: 'red'
     }
 
+    // 声明向所有子组件提供context包含的数据名称与类型
     static childContextTypes = {
       color: PropTypes.string.isRequired
     }
+    // 向所有子组件提供context
     getChildContext () {
       return {color: this.state.color}
     }
@@ -38,7 +40,7 @@
   }
 
   class B extends React.Component {
-
+    // 子组件不需要父组件提供的context, 就不需要声明
     render() {
       return (
         <div>
@@ -51,6 +53,7 @@
 
   class C extends React.Component {
 
+    // 声明接收context(A组件提供)
     static contextTypes = {
       color: PropTypes.string.isRequired
     }
